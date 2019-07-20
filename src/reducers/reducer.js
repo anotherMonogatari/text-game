@@ -2,7 +2,7 @@
 const initState = {
     turn: 0,
     you: {
-      hp: 100000,
+      hp: 1500,
       power: 100,
       armor: 10,
       wound: 0,
@@ -12,7 +12,7 @@ const initState = {
       powerCD: 0
     },
     enemy: {
-      hp: 100000,
+      hp: 1500,
       power: 100,
       armor: 40,
       wound: 0
