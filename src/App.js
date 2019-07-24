@@ -19,10 +19,10 @@ const App = (props) => {
         <p>Attack: {props.enemy.power}</p>
 
         <button onClick={props.attackHandler}>Attack</button>
-        <button onClick={props.thunderHandler} disabled={(props.you.thunderCD <= 0) ? false : true}>Thunder</button>
-        <button onClick={props.armorHandler} disabled={(props.you.armorCD <= 0) ? false : true}>Armor Up</button>
-        <button onClick={props.healHandler} disabled={(props.you.healCD <= 0) ? false : true}>Heal up</button>
-        <button onClick={props.powerHandler} disabled={(props.you.powerCD <= 0) ? false : true}>Power Up</button>
+        <button onClick={props.thunderHandler} disabled={(props.you.thunderCD <= 0) ? false : true}>Thunder ({(props.you.thunderCD > 0) ? props.you.thunderCD : 'ready'})</button>
+        <button onClick={props.armorHandler} disabled={(props.you.armorCD <= 0) ? false : true}>Armor Up ({(props.you.armorCD > 0) ? props.you.armorCD : 'ready'})</button>
+        <button onClick={props.healHandler} disabled={(props.you.healCD <= 0) ? false : true}>Heal up ({(props.you.healCD > 0) ? props.you.healCD : 'ready'})</button>
+        <button onClick={props.powerHandler} disabled={(props.you.powerCD <= 0) ? false : true}>Power Up ({(props.you.powerCD > 0) ? props.you.powerCD : 'ready'})</button>
       </div>}
      
       <button onClick={props.restartHandler}>Restart</button>
