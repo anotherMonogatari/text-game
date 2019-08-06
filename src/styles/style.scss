@@ -1,0 +1,77 @@
+$color1 : #34421E;
+$color2 : #F1F1EF;
+$color3 : #C19434;
+
+body {
+background-color: $color2;
+font-family: 'Blinker', sans-serif;
+max-width: 768px;
+margin: 0 auto;
+}
+
+.flex {
+    width: 80%;
+    margin: 4rem auto;
+    display: flex;
+    justify-content: space-between;
+}
+
+.player {
+    width: 20%;
+    padding: 2rem;
+    font-size: 1.3rem;
+    color: $color1;
+    border: 2px solid $color3;
+}
+
+.vs {
+    font-size: 5rem;
+    color: $color1;
+    align-self: center;
+}
+
+.activeBuff {
+    transition: all 0.2s ease-out;
+    color: $color3;
+}
+
+.button {
+    cursor: pointer;
+    display: block;
+    width: 80%;
+    margin: 1rem auto;
+    font-size: 1.4rem;
+    padding: 1rem;
+    border: 2px solid $color1;
+    background-color: transparent;
+    color: $color1;    
+    transition: all 0.2s ease-out;
+    &:focus {
+        outline: 1px solid $color3;
+    }
+    &:disabled {
+        opacity: 0.5;
+        &:hover {
+            cursor: default;
+    }
+    }             
+    &-restart {
+        margin: 4rem auto;
+        border: 2px solid $color3;
+        background-color: transparent;
+    }
+    &-active {
+        background-color: $color3;
+    }
+}
+
+.result {
+    margin-top: 20vh;
+    font-size: 5rem;
+    color: $color1;
+}
+
+.hint {
+    font-size: 1rem;
+    color: $color1;
+}

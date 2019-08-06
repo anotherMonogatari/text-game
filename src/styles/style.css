@@ -1,0 +1,60 @@
+body {
+  background-color: #F1F1EF;
+  font-family: 'Blinker', sans-serif;
+  max-width: 768px;
+  margin: 0 auto; }
+
+.flex {
+  width: 80%;
+  margin: 4rem auto;
+  display: flex;
+  justify-content: space-between; }
+
+.player {
+  width: 20%;
+  padding: 2rem;
+  font-size: 1.3rem;
+  color: #34421E;
+  border: 2px solid #C19434; }
+
+.vs {
+  font-size: 5rem;
+  color: #34421E;
+  align-self: center; }
+
+.activeBuff {
+  transition: all 0.2s ease-out;
+  color: #C19434; }
+
+.button {
+  cursor: pointer;
+  display: block;
+  width: 80%;
+  margin: 1rem auto;
+  font-size: 1.4rem;
+  padding: 1rem;
+  border: 2px solid #34421E;
+  background-color: transparent;
+  color: #34421E;
+  transition: all 0.2s ease-out; }
+  .button:focus {
+    outline: 1px solid #C19434; }
+  .button:disabled {
+    opacity: 0.5; }
+    .button:disabled:hover {
+      cursor: default; }
+  .button-restart {
+    margin: 4rem auto;
+    border: 2px solid #C19434;
+    background-color: transparent; }
+  .button-active {
+    background-color: #C19434; }
+
+.result {
+  margin-top: 20vh;
+  font-size: 5rem;
+  color: #34421E; }
+
+.hint {
+  font-size: 1rem;
+  color: #34421E; }

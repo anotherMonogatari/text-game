@@ -12,7 +12,7 @@ const initState = {
       powerCD: 0
     },
     enemy: {
-      hp: 4000,
+      hp: 5000,
       power: 120,
       armor: 40,
       wound: 0
@@ -43,10 +43,10 @@ const reducer = (state = initState, action) => {
 
     const armorBonus = 40;
     const armorDuration = 5;
-    const armorTimeOut = 9;
+    const armorTimeOut = 10;
     const powerBonus = 100;
     const powerDuration = 5;
-    const powerTimeOut = 9;
+    const powerTimeOut = 10;
 
     if (action.type === 'ATTACK') {
           // Changing HP of characters and writing wounds they got

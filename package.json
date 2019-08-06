@@ -30,6 +30,8 @@
     ]
   },
   "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-sass": "^4.0.2",
     "react-redux": "^7.1.0",
     "redux": "^4.0.4"
   }
