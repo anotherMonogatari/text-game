@@ -12,23 +12,23 @@ const App = (props) => {
       {(props.you.hp > 0 && props.enemy.hp > 0) && <div>
         <div className='flex'>
           <div className='player'><p>You</p>
-        <p>❤ {props.you.hp} <span
+        <p><i className='fas fa-heart'></i> {props.you.hp} <span
           style={(props.you.wound > 0) ? {color: 'red'} : {color: 'green'}}>
             {(props.you.wound !== 0) && -props.you.wound}</span></p>
 
         <p>
-          <span className={(props.you.armorCD >= 5) && 'activeBuff'} >⛊</span> {props.you.armor}</p>
+          <span className={(props.you.armorCD >= 5) && 'activeBuff'} ><i className='fas fa-shield-alt'></i></span> {props.you.armor}</p>
 
         <p>
-           <span className={(props.you.powerCD >= 5) && 'activeBuff'} >⚔</span> {props.you.power}</p></div>
+           <span className={(props.you.powerCD >= 5) && 'activeBuff'} ><i className='fas fa-fist-raised'></i></span> {props.you.power}</p></div>
 
         <span className='vs'>VS</span>
 
         <div className='player'><p>Enemy</p>
-        <p>❤ {props.enemy.hp} <span 
+        <p><i className='fas fa-heart'></i> {props.enemy.hp} <span 
           style={{color: 'red'}}>{(props.enemy.wound !== 0) && -props.enemy.wound}</span></p>
-        <p>⛊ {props.enemy.armor}</p>
-        <p>⚔ {props.enemy.power}</p></div>
+        <p><i className='fas fa-shield-alt'></i> {props.enemy.armor}</p>
+        <p><i className='fas fa-fist-raised'></i> {props.enemy.power}</p></div>
         </div> 
         
 
