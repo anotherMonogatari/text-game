@@ -1,48 +1,98 @@
-$color1 : #34421E;
-$color2 : #F1F1EF;
-$color3 : #C19434;
+$color1 : #000;
+$color2 : rgb(255, 255, 255);
+$color3 : #666;
 
 body {
+position: relative;
 background-color: $color2;
 font-family: 'Blinker', sans-serif;
 max-width: 768px;
 margin: 0 auto;
+box-sizing: border-box;
 }
-
+// icons
+.player-icon {
+    height: 180px;
+ width: 150px;
+ background-size: contain;
+ background-repeat: no-repeat;
+ margin: 0 auto;
+}
+.monk {    
+ background-image: url('./monk.jpg');
+}
+.mage {    
+ background-image: url('./mage.jpg');
+}
+.warrior {
+    background-image: url('./warrior.jpg');
+}
+.enemy-icon {
+    margin: 0 auto;
+    
+    height: 180px;
+    width: 150px;
+    background-image: url('./skeleton.jpg');
+    
+ background-size: cover;
+}
+/////////////////////////
+//modal
+.class {
+    background: #fff;
+    text-align: center;
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 100%;
+    .class-container {
+        margin-top: 4rem;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        & > div:not(:last-child) {
+            border-right: 2px solid $color1;
+        }
+        button {
+            cursor: pointer;
+            margin-top: 2rem;
+            background: $color2;
+            border: none;
+            padding: 14px 28px;
+            font-size: 18px;
+            text-decoration: underline;
+            font-weight: bold;
+        }
+        p {
+            padding: 0 2rem;
+        }
+    }
+}
+/////////////////////////
 .flex {
     width: 80%;
     margin: 4rem auto;
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 .player {
-    width: 20%;
     padding: 2rem;
     font-size: 1.3rem;
     color: $color1;
-    border: 2px solid $color3;
-}
-
-.vs {
-    font-size: 5rem;
-    color: $color1;
-    align-self: center;
-}
-
-.activeBuff {
-    transition: all 0.2s ease-out;
-    color: $color3;
+    border-right: 2px solid $color3;
+    &:last-child {
+        border: none;
+    }
 }
 
 .button {
     cursor: pointer;
     display: block;
-    width: 80%;
     margin: 1rem auto;
     font-size: 1.4rem;
     padding: 1rem;
-    border: 2px solid $color1;
+    border: none;
+    border-bottom: 2px solid $color1;
     background-color: transparent;
     color: $color1;    
     transition: all 0.2s ease-out;
@@ -57,11 +107,7 @@ margin: 0 auto;
     }             
     &-restart {
         margin: 4rem auto;
-        border: 2px solid $color3;
         background-color: transparent;
-    }
-    &-active {
-        background-color: $color3;
     }
 }
 
@@ -79,45 +125,47 @@ margin: 0 auto;
     padding: 0 1.2rem;
 }
 
-@media screen and (max-width: 680px) {
-    .vs {
-        font-size: 4rem;
-    }
-    .player {
-        width: 25%;
-    }
-}
 @media screen and (max-width: 590px) {
-    .vs {
-        font-size: 3rem;
+    .class{
+        margin-top: -2rem;
+        .class-container {
+        margin-top: 1rem;
+        grid-template-columns: 1fr;
+        button, p {
+            margin: 0;
+        }
+        & > div {
+            width: 70%;
+            margin: 2rem auto 0;
+            padding-bottom: 2rem;
+        }
+        & > div:not(:last-child) {
+            border: none;
+            border-bottom: 1px solid $color1;
+        }
+    }
     }
     .player {
         padding: 1rem;
-        width: 30%;
     }
 }
 @media screen and (max-width: 460px) {
-    .vs {
-        display: none;
-    }
-    .player {
-        padding: 1rem;
-        width: 40%;
-        border: none;
-        border-right: 2px solid $color3;
-        &:last-child {
-            border: none;
-        }
-    }
     .flex {
-        justify-content: center;
         width: 100%;
     }
+   .player {
+        padding: 1rem;
+        
+    }    
     .button {
         font-size: 1.2rem;
         padding: 0.5rem;
     }
     .result {
         font-size: 4rem;
+    }
+    .player-icon, .enemy-icon {
+        height: 120px;
+     width: 100px;
     }
 }

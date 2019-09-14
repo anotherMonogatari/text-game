@@ -1,5 +1,6 @@
 // Characters stats
 const initState = {
+    class: 'monk',
     turn: 0,
     you: {
       hp: 1500,
@@ -12,7 +13,7 @@ const initState = {
       powerCD: 0
     },
     enemy: {
-      hp: 5000,
+      hp: 2500,
       power: 120,
       armor: 40,
       wound: 0
@@ -34,19 +35,26 @@ const reducer = (state = initState, action) => {
 
     const yourHeal = attackRandom(minYouAttack, maxYouAttack);
     // here you can change ballance of your abilities
-    const healMultiplier = 2;
-    const healTimeOut = 4;
+    const healMultiplier = 3;
+    const healTimeOut = 6;
 
     const thunderMultiplier = 4;
     const thunderAttack = (yourAttack + state.enemy.armor) * thunderMultiplier - state.enemy.armor;
     const thunderTimeOut = 3;
 
-    const armorBonus = 40;
+    const armorBonus = 60;
     const armorDuration = 5;
     const armorTimeOut = 10;
-    const powerBonus = 100;
+    const powerBonus = 80;
     const powerDuration = 5;
     const powerTimeOut = 10;
+
+    if (action.type === 'CLASS') {
+      return {
+        ...state,
+        class: action.payload
+      }
+    }
 
     if (action.type === 'ATTACK') {
           // Changing HP of characters and writing wounds they got
@@ -54,6 +62,7 @@ const reducer = (state = initState, action) => {
           // when using some ability it also decrease CD of other abilities by 1
             // Basic attack
             return {
+            ...state,
             turn: state.turn + 1,
             you: {
               ...state.you,
@@ -96,6 +105,7 @@ const reducer = (state = initState, action) => {
     // Thunder strike mechanic
     if (action.type === 'THUNDER') {
         return {
+          ...state,
             turn: state.turn + 1,
             you: {
               ...state.you,
@@ -137,6 +147,7 @@ const reducer = (state = initState, action) => {
     // Healing mechanic
     if (action.type === 'HEAL') {
         return {
+          ...state,
             turn: state.turn + 1,
             you: {
               ...state.you,
@@ -181,6 +192,7 @@ const reducer = (state = initState, action) => {
     // Armor up
     if (action.type === 'ARMOR') {
       return {
+        ...state,
         turn: state.turn + 1,
         you: {
           ...state.you,
@@ -204,6 +216,7 @@ const reducer = (state = initState, action) => {
     // power up
     if (action.type === 'POWER') {
       return {
+        ...state,
         turn: state.turn + 1,
         you: {
           ...state.you,
