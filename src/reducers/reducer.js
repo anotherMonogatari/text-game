@@ -153,36 +153,13 @@ const reducer = (state = initState, action) => {
               ...state.you,
               // Preventing heal over max hp
             hp: (() => {
-              if (state.you.powerCD === powerDuration) {
-                  if (state.you.hp - enemyAttack + (yourHeal-powerBonus)*healMultiplier >= initState.you.hp) {return initState.you.hp}
-                  else {return state.you.hp - enemyAttack + (yourHeal-powerBonus)*healMultiplier} }
-
-              else if (state.you.armorCD === armorDuration) {
-                if (state.you.hp - enemyAttack - armorBonus + (yourHeal)*healMultiplier >= initState.you.hp) {return initState.you.hp}
-                else {return state.you.hp - enemyAttack - armorBonus + (yourHeal)*healMultiplier} }
-
-              else {
                   if (state.you.hp - enemyAttack + yourHeal*healMultiplier >= initState.you.hp) {return initState.you.hp}
                   else {return state.you.hp - enemyAttack + yourHeal*healMultiplier}
-               } 
-            })(),
-            power: (() => {
-              if (state.you.powerCD === powerDuration) {return initState.you.power}
-              else {return state.you.power}
-            })(),
-            armor: (() => {
-              if (state.you.armorCD === armorDuration) {return initState.you.armor}
-              else {return state.you.armor}
-            })(),
-            wound: (() => {
-              if (state.you.armorCD === armorDuration) {return enemyAttack + armorBonus  - yourHeal*healMultiplier}
-              else if (state.you.powerCD === powerDuration) {return enemyAttack - (yourHeal-powerBonus)*healMultiplier}
-              else {return enemyAttack  - yourHeal*healMultiplier}
-            })(),
+                  })(),
+
+            wound: enemyAttack  - yourHeal*healMultiplier,
             healCD: healTimeOut,
-            thunderCD: state.you.thunderCD - 1,
-            powerCD: state.you.powerCD - 1,
-            armorCD: state.you.armorCD - 1
+            thunderCD: state.you.thunderCD - 1
           },
             enemy: {
               ...state.enemy,
@@ -197,16 +174,11 @@ const reducer = (state = initState, action) => {
         you: {
           ...state.you,
         armor: state.you.armor + armorBonus,
-        power: (() => {
-          if (state.you.powerCD === powerDuration) {return initState.you.power}
-          else {return state.you.power}
-        })(),
+        
         hp: state.you.hp - enemyAttack + armorBonus,
         wound: enemyAttack - armorBonus,
         armorCD: armorTimeOut,
-        thunderCD: state.you.thunderCD - 1,
-        powerCD: state.you.powerCD - 1,
-        healCD: state.you.healCD - 1
+        thunderCD: state.you.thunderCD - 1
       },
         enemy: {
           ...state.enemy,
@@ -220,23 +192,11 @@ const reducer = (state = initState, action) => {
         turn: state.turn + 1,
         you: {
           ...state.you,
-          hp: (() => {
-            if (state.you.armorCD === armorDuration) {return state.you.hp - enemyAttack - armorBonus}
-            else {return state.you.hp - enemyAttack}
-          })(),
-          armor: (() => {
-            if (state.you.armorCD === armorDuration) {return initState.you.armor}
-            else {return state.you.armor}
-          })(),
-          wound: (() => {
-            if (state.you.armorCD === armorDuration) {return enemyAttack + armorBonus}
-            else {return enemyAttack}
-          })(),
+          hp: state.you.hp - enemyAttack,
+          wound: enemyAttack,
         power: state.you.power + powerBonus,
         powerCD: powerTimeOut,
-        armorCD: state.you.armorCD - 1,
-        thunderCD: state.you.thunderCD - 1,
-        healCD: state.you.healCD - 1
+        thunderCD: state.you.thunderCD - 1
       },
         enemy: {
           ...state.enemy,
@@ -245,7 +205,7 @@ const reducer = (state = initState, action) => {
     }
     // RESTART button will refresh page
     if (action.type === 'RESTART') {
-        document.location.reload()
+      return initState
     }
  return state
 }

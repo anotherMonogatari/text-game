@@ -2,31 +2,34 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 
-import './styles/style.css';
+import './styles/style.scss';
 
 const App = (props) => {
   // Displaying stats while HP != 0 and fight result when HP < 0
   // also signaling when buffs are active
     return <section>
       <div className='class'>
-        <h2>Choose class:</h2>
+        <h2>Choose a class:</h2>
         <div className='class-container'>
 
-          <div><div className={'player-icon warrior'}></div>
-        <button onClick={props.classHandler}>Warrior</button>
-        <p>Can temporary boost his defence</p></div>
-
+              
           <div><div className={'player-icon monk'}></div>
         <button onClick={props.classHandler}>Monk</button>
         <p>Can heal himself</p></div>
-
-          <div><div className={'player-icon mage'}></div>
-        <button onClick={props.classHandler}>Mage</button>
-        <p>Can temporary boost his attack power</p></div>     
-        </div>
         
+
+        <div><div className={'player-icon mage'}></div>
+                <button onClick={props.classHandler}>Mage</button>
+                <p>Can temporary boost his attack power</p></div> 
+          
+        <div><div className={'player-icon warrior'}></div>
+        <button onClick={props.classHandler}>Warrior</button>
+        <p>Can temporary boost his defence</p></div>
+        </div>
       </div>
-      <div style={{textAlign: 'center'}}>
+
+      <div className='game' style={{textAlign: 'center',
+                     display: 'none'}}>
       {(props.you.hp > 0 && props.enemy.hp > 0) && <div>
         <div className='flex'>
           <div className='player'>
@@ -34,7 +37,7 @@ const App = (props) => {
             <p><b>You:</b></p>
         <p>Health:<br></br> <b>{props.you.hp}</b> <span
           style={(props.you.wound > 0) ? {color: 'red'} : {color: 'green'}}>
-            {(props.you.wound !== 0) && <b>{-props.you.wound}</b>}</span></p>
+            {(props.you.wound !== 0) && <b>{(props.you.wound > 0) ? -props.you.wound : `+${-props.you.wound}`}</b>}</span></p>
 
         <p>
           Armor:<br></br> <b>{`${props.you.armor} `}</b>
@@ -101,10 +104,14 @@ const mapDispatchToProps = (dispatch) => {
   return {
     classHandler: (event) => {
       document.querySelector('.class').style.display = 'none'
+      document.querySelector('.game').style.display = 'block'
       return dispatch({type: 'CLASS', payload: event.target.innerHTML.toLowerCase()})
     },
     attackHandler: () => dispatch({type: 'ATTACK'}),
-    restartHandler: () => dispatch({type: 'RESTART'}),
+    restartHandler: () => {
+      document.querySelector('.class').style.display = 'block'
+      document.querySelector('.game').style.display = 'none'
+      return dispatch({type: 'RESTART'})},
     thunderHandler: () => dispatch({type: 'THUNDER'}),
     armorHandler: () => dispatch({type: 'ARMOR'}),
     healHandler: () => dispatch({type: 'HEAL'}),
