@@ -42,10 +42,10 @@ const reducer = (state = initState, action) => {
     const thunderAttack = (yourAttack + state.enemy.armor) * thunderMultiplier - state.enemy.armor;
     const thunderTimeOut = 3;
 
-    const armorBonus = 60;
+    const armorBonus = 70;
     const armorDuration = 5;
     const armorTimeOut = 10;
-    const powerBonus = 80;
+    const powerBonus = 90;
     const powerDuration = 5;
     const powerTimeOut = 10;
 
