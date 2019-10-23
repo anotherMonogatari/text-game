@@ -5,12 +5,12 @@ $color2 : rgb(255, 255, 255);
 $color3 : #666;
 
 html {
-    font-size: calc(5px + 2vh);
+    font-size: 16px;
 }
 
 body {
 position: relative;
-height: 100vh;
+height: 550px;
 background-color: $color2;
 font-family: 'Blinker', sans-serif;
 max-width: 768px;
@@ -74,7 +74,7 @@ box-sizing: border-box;
 /////////////////////////
 .flex {
     width: 80%;
-    margin: 5vh auto 0;
+    margin: 12rem auto 0;
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
@@ -172,6 +172,9 @@ box-sizing: border-box;
     
 }
 @media screen and (max-width: 320px) {
+    .flex {
+        margin-top: 7rem;
+    }
     .player-icon, .enemy-icon {
         width: 100px;
         height: 120px;
