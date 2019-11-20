@@ -1,4 +1,5 @@
 // Characters stats
+
 const initState = {
     class: 'monk',
     turn: 0,
@@ -29,10 +30,9 @@ const reducer = (state = initState, action) => {
     const attackRandom = (min, max) => {
         return Math.round(Math.random() * (max - min + 1) ) + min;
       }
-      // Calculating damage reduction by armor
+    // Calculating damage reduction by armor
     const yourAttack = attackRandom(minYouAttack, maxYouAttack) - state.enemy.armor;
     const enemyAttack = attackRandom(minEnemyAttack, maxEnemyAttack) - state.you.armor;
-
     const yourHeal = attackRandom(minYouAttack, maxYouAttack);
     // here you can change ballance of your abilities
     const healMultiplier = 3;
@@ -68,47 +68,6 @@ const reducer = (state = initState, action) => {
               ...state.you,
               // Returning initial armor after 5 turns
               // in the turn when armor up ends change your armor              
-            hp: (() => {
-              if (state.you.armorCD === armorDuration) {return state.you.hp - enemyAttack - armorBonus}
-              else {return state.you.hp - enemyAttack}
-            })(),
-            armor: (() => {
-              if (state.you.armorCD === armorDuration) {return initState.you.armor}
-              else {return state.you.armor}
-            })(),
-            wound: (() => {
-              if (state.you.armorCD === armorDuration) {return enemyAttack + armorBonus}
-              else {return enemyAttack}
-            })(),
-            // Returning initial power after 5 turns
-            power: (() => {
-              if (state.you.powerCD === powerDuration) {return initState.you.power}
-              else {return state.you.power}
-            })(),
-            thunderCD: state.you.thunderCD - 1,
-            healCD: state.you.healCD - 1,
-            powerCD: state.you.powerCD - 1,
-            armorCD: state.you.armorCD - 1
-          },
-            enemy: {
-              ...state.enemy,
-              // in the turn when power up ends change your attack
-            hp: (() => {
-              if (state.you.powerCD === powerDuration) {return state.enemy.hp - yourAttack + powerBonus}
-              else {return state.enemy.hp - yourAttack}
-            })(),
-            wound: (() => {
-              if (state.you.powerCD === powerDuration) {return yourAttack - powerBonus}
-              else {return yourAttack}
-            })()
-          }} }         
-    // Thunder strike mechanic
-    if (action.type === 'THUNDER') {
-        return {
-          ...state,
-            turn: state.turn + 1,
-            you: {
-              ...state.you,
               hp: (() => {
                 if (state.you.armorCD === armorDuration) {return state.you.hp - enemyAttack - armorBonus}
                 else {return state.you.hp - enemyAttack}
@@ -121,10 +80,51 @@ const reducer = (state = initState, action) => {
                 if (state.you.armorCD === armorDuration) {return enemyAttack + armorBonus}
                 else {return enemyAttack}
               })(),
+            // Returning initial power after 5 turns
               power: (() => {
                 if (state.you.powerCD === powerDuration) {return initState.you.power}
                 else {return state.you.power}
               })(),
+              thunderCD: state.you.thunderCD - 1,
+              healCD: state.you.healCD - 1,
+              powerCD: state.you.powerCD - 1,
+              armorCD: state.you.armorCD - 1
+            },
+            enemy: {
+              ...state.enemy,
+              // in the turn when power up ends change your attack
+              hp: (() => {
+                if (state.you.powerCD === powerDuration) {return state.enemy.hp - yourAttack + powerBonus}
+                else {return state.enemy.hp - yourAttack}
+              })(),
+              wound: (() => {
+                if (state.you.powerCD === powerDuration) {return yourAttack - powerBonus}
+                else {return yourAttack}
+              })()
+          }} }         
+    // Thunder strike mechanic
+    if (action.type === 'THUNDER') {
+        return {
+          ...state,
+          turn: state.turn + 1,
+          you: {
+            ...state.you,
+            hp: (() => {
+              if (state.you.armorCD === armorDuration) {return state.you.hp - enemyAttack - armorBonus}
+              else {return state.you.hp - enemyAttack}
+            })(),
+            armor: (() => {
+              if (state.you.armorCD === armorDuration) {return initState.you.armor}
+              else {return state.you.armor}
+            })(),
+            wound: (() => {
+              if (state.you.armorCD === armorDuration) {return enemyAttack + armorBonus}
+              else {return enemyAttack}
+            })(),
+            power: (() => {
+              if (state.you.powerCD === powerDuration) {return initState.you.power}
+              else {return state.you.power}
+            })(),
             thunderCD: thunderTimeOut,
             healCD: state.you.healCD - 1,
             powerCD: state.you.powerCD - 1,
@@ -148,21 +148,20 @@ const reducer = (state = initState, action) => {
     if (action.type === 'HEAL') {
         return {
           ...state,
-            turn: state.turn + 1,
-            you: {
-              ...state.you,
-              // Preventing heal over max hp
+          turn: state.turn + 1,
+          you: {
+            ...state.you,
+            // Preventing heal over max hp
             hp: (() => {
                   if (state.you.hp - enemyAttack + yourHeal*healMultiplier >= initState.you.hp) {return initState.you.hp}
                   else {return state.you.hp - enemyAttack + yourHeal*healMultiplier}
                   })(),
-
             wound: enemyAttack  - yourHeal*healMultiplier,
             healCD: healTimeOut,
             thunderCD: state.you.thunderCD - 1
           },
-            enemy: {
-              ...state.enemy,
+          enemy: {
+            ...state.enemy,
             wound: 0
           }}
     }
@@ -172,16 +171,15 @@ const reducer = (state = initState, action) => {
         ...state,
         turn: state.turn + 1,
         you: {
-          ...state.you,
+        ...state.you,
         armor: state.you.armor + armorBonus,
-        
         hp: state.you.hp - enemyAttack + armorBonus,
         wound: enemyAttack - armorBonus,
         armorCD: armorTimeOut,
         thunderCD: state.you.thunderCD - 1
       },
         enemy: {
-          ...state.enemy,
+        ...state.enemy,
         wound: 0
       }}
     }
@@ -191,15 +189,15 @@ const reducer = (state = initState, action) => {
         ...state,
         turn: state.turn + 1,
         you: {
-          ...state.you,
-          hp: state.you.hp - enemyAttack,
-          wound: enemyAttack,
+        ...state.you,
+        hp: state.you.hp - enemyAttack,
+        wound: enemyAttack,
         power: state.you.power + powerBonus,
         powerCD: powerTimeOut,
         thunderCD: state.you.thunderCD - 1
       },
         enemy: {
-          ...state.enemy,
+        ...state.enemy,
         wound: 0
       }}
     }
